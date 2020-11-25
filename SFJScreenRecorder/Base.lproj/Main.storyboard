@@ -12,7 +12,6 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SFJScreenRecorder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -27,14 +26,6 @@
                                         <state key="normal" title="开始"/>
                                         <connections>
                                             <action selector="startBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YX2-AW-2Y2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaF-w8-Z7l">
-                                        <rect key="frame" x="98" y="22" width="31" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="停止"/>
-                                        <connections>
-                                            <action selector="stopBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zRy-nl-vDx"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MC2-o8-mU3">
@@ -53,6 +44,14 @@
                                             <constraint firstAttribute="width" constant="30" id="mCF-wY-MLx"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSC-lq-OUs">
+                                        <rect key="frame" x="235" y="22" width="44" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="merge"/>
+                                        <connections>
+                                            <action selector="mergeBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eRl-Zc-Uk0"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
@@ -75,13 +74,19 @@
                                     <segue destination="ihR-9L-mvs" kind="embed" identifier="player" id="xTd-Rc-Ohi"/>
                                 </connections>
                             </containerView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ZmT-AE-dmy">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dNa-8Z-P75" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="44p-7t-TjT"/>
+                            <constraint firstItem="ZmT-AE-dmy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jvl-Cx-4AZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dNa-8Z-P75" secondAttribute="trailing" id="LJl-jk-VuB"/>
                             <constraint firstItem="2wu-XZ-DCr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UgA-3b-9EK"/>
+                            <constraint firstItem="ZmT-AE-dmy" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="W8i-6X-DtW"/>
                             <constraint firstItem="dNa-8Z-P75" firstAttribute="top" secondItem="MFz-tT-Ufu" secondAttribute="bottom" id="aIv-3s-t3e"/>
                             <constraint firstItem="MFz-tT-Ufu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dM7-VW-CX1"/>
                             <constraint firstItem="2wu-XZ-DCr" firstAttribute="top" secondItem="dNa-8Z-P75" secondAttribute="bottom" id="dl2-IB-aRY"/>
@@ -94,10 +99,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="gHj-XQ-5f4"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="ZmT-AE-dmy" id="XMw-hC-Rsc"/>
                         <outlet property="animateV" destination="EEV-7F-dJU" id="mYE-ON-Wz4"/>
                         <outlet property="tableView" destination="2wu-XZ-DCr" id="9R7-cd-TWc"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="327.536231884058" y="77.678571428571431"/>
         </scene>

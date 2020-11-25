@@ -4,7 +4,7 @@
 //
 //  Created by Shafujiu on 2020/11/23.
 //
-// 差一个 合并；异常情况处理；横竖屏
+// 差一个 合并；异常情况处理（前后台）；横竖屏
 import UIKit
 import AVKit
 @available(iOS 11.0, *)
@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var animateV: UIView!
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     var items: [URL] = []
     var playerVC: AVPlayerViewController?
     let screenRecorder = SFJScreenRecorderCoordinator()
@@ -31,11 +31,31 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func mergeBtnClick(_ sender: UIButton) {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+        DPVideoMerger().mergeVideos(withFileURLs: items) { (outUrl, error) in
+            self.activityIndicatorView.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+            self.activityIndicatorView.isHidden = true
+            if error != nil {
+                let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
+                let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (a) in
+                }))
+                self.present(alert, animated: true) {() -> Void in }
+                return
+            }
+            let objAVPlayerVC = AVPlayerViewController()
+            objAVPlayerVC.player = AVPlayer(url: outUrl!)
+            self.present(objAVPlayerVC, animated: true, completion: {() -> Void in
+                objAVPlayerVC.player?.play()
+            })
+        }
+        
+    }
     @IBAction func startBtnClick(_ sender: Any) {
         screenRecorder.startRecording()
-    }
-    
-    @IBAction func stopBtnClick(_ sender: Any) {
     }
     
     @IBAction func clear(_ sender: Any) {

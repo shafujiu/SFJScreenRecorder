@@ -16,6 +16,7 @@
 		817A9EDA256B4CBC00DABE2F /* SFJScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A9ED9256B4CBC00DABE2F /* SFJScreenRecorder.swift */; };
 		817A9EE4256B5AC600DABE2F /* SFJScreenRecorderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A9EE3256B5AC600DABE2F /* SFJScreenRecorderCoordinator.swift */; };
 		817A9EEC256B5B7700DABE2F /* SFJScreenRecorderFileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A9EEB256B5B7700DABE2F /* SFJScreenRecorderFileUtil.swift */; };
+		8185D45D256E4BBF00AA6756 /* DPVideoMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8185D45C256E4BBF00AA6756 /* DPVideoMerger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		817A9ED9256B4CBC00DABE2F /* SFJScreenRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFJScreenRecorder.swift; sourceTree = "<group>"; };
 		817A9EE3256B5AC600DABE2F /* SFJScreenRecorderCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFJScreenRecorderCoordinator.swift; sourceTree = "<group>"; };
 		817A9EEB256B5B7700DABE2F /* SFJScreenRecorderFileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFJScreenRecorderFileUtil.swift; sourceTree = "<group>"; };
+		8185D45C256E4BBF00AA6756 /* DPVideoMerger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPVideoMerger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				817A9ED9256B4CBC00DABE2F /* SFJScreenRecorder.swift */,
 				813EBF0B256CE8F9005B21B5 /* SFJScreenRecorderOverlayWindow.swift */,
 				817A9EEB256B5B7700DABE2F /* SFJScreenRecorderFileUtil.swift */,
+				8185D45C256E4BBF00AA6756 /* DPVideoMerger.swift */,
 			);
 			path = SFJScreenRecorder;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				817A9EE4256B5AC600DABE2F /* SFJScreenRecorderCoordinator.swift in Sources */,
 				817A9EEC256B5B7700DABE2F /* SFJScreenRecorderFileUtil.swift in Sources */,
 				813EBF0C256CE8FA005B21B5 /* SFJScreenRecorderOverlayWindow.swift in Sources */,
+				8185D45D256E4BBF00AA6756 /* DPVideoMerger.swift in Sources */,
 				817A9EA0256B454600DABE2F /* AppDelegate.swift in Sources */,
 				817A9EDA256B4CBC00DABE2F /* SFJScreenRecorder.swift in Sources */,
 			);
