@@ -18,38 +18,6 @@
             endingLineNumber = "19"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6D04C794-D7D2-4F7B-ABE0-EA92255CB11E - bee95c931b4c2f35"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.RPPreviewViewController) -&gt; () in SFJScreenRecoder.ViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "SFJScreenRecoder"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shafujiu/Documents/My%20GitHub%20Code/SFJScreenRecoder/SFJScreenRecoder/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "196">
-               </Location>
-               <Location
-                  uuid = "6D04C794-D7D2-4F7B-ABE0-EA92255CB11E - 5fbf7c23e74ebe0a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (__C.RPPreviewViewController) -&gt; () in SFJScreenRecoder.ViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "SFJScreenRecoder"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/shafujiu/Documents/My%20GitHub%20Code/SFJScreenRecoder/SFJScreenRecoder/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

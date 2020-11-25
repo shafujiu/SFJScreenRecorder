@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		813EBF0C256CE8FA005B21B5 /* SFJScreenRecorderOverlayWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813EBF0B256CE8F9005B21B5 /* SFJScreenRecorderOverlayWindow.swift */; };
 		817A9EA0256B454600DABE2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A9E9F256B454600DABE2F /* AppDelegate.swift */; };
 		817A9EA4256B454600DABE2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A9EA3256B454600DABE2F /* ViewController.swift */; };
 		817A9EA7256B454600DABE2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 817A9EA5256B454600DABE2F /* Main.storyboard */; };
@@ -35,13 +36,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		813EBEC4256C9CFF005B21B5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		813EBF0B256CE8F9005B21B5 /* SFJScreenRecorderOverlayWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFJScreenRecorderOverlayWindow.swift; sourceTree = "<group>"; };
 		817A9E9C256B454600DABE2F /* SFJScreenRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFJScreenRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		817A9E9F256B454600DABE2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		817A9EA3256B454600DABE2F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		817A9EA6256B454600DABE2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		817A9EA8256B454900DABE2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		817A9EAB256B454900DABE2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		817A9EAD256B454900DABE2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		817A9EB2256B454900DABE2F /* SFJScreenRecorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFJScreenRecorderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		817A9EBD256B454900DABE2F /* SFJScreenRecorderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFJScreenRecorderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		817A9ED9256B4CBC00DABE2F /* SFJScreenRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFJScreenRecorder.swift; sourceTree = "<group>"; };
@@ -101,7 +103,7 @@
 				817A9EA5256B454600DABE2F /* Main.storyboard */,
 				817A9EA8256B454900DABE2F /* Assets.xcassets */,
 				817A9EAA256B454900DABE2F /* LaunchScreen.storyboard */,
-				817A9EAD256B454900DABE2F /* Info.plist */,
+				813EBEC4256C9CFF005B21B5 /* Info.plist */,
 			);
 			path = SFJScreenRecorder;
 			sourceTree = "<group>";
@@ -109,8 +111,9 @@
 		817A9ED8256B4C9500DABE2F /* SFJScreenRecorder */ = {
 			isa = PBXGroup;
 			children = (
-				817A9ED9256B4CBC00DABE2F /* SFJScreenRecorder.swift */,
 				817A9EE3256B5AC600DABE2F /* SFJScreenRecorderCoordinator.swift */,
+				817A9ED9256B4CBC00DABE2F /* SFJScreenRecorder.swift */,
+				813EBF0B256CE8F9005B21B5 /* SFJScreenRecorderOverlayWindow.swift */,
 				817A9EEB256B5B7700DABE2F /* SFJScreenRecorderFileUtil.swift */,
 			);
 			path = SFJScreenRecorder;
@@ -249,6 +252,7 @@
 				817A9EA4256B454600DABE2F /* ViewController.swift in Sources */,
 				817A9EE4256B5AC600DABE2F /* SFJScreenRecorderCoordinator.swift in Sources */,
 				817A9EEC256B5B7700DABE2F /* SFJScreenRecorderFileUtil.swift in Sources */,
+				813EBF0C256CE8FA005B21B5 /* SFJScreenRecorderOverlayWindow.swift in Sources */,
 				817A9EA0256B454600DABE2F /* AppDelegate.swift in Sources */,
 				817A9EDA256B4CBC00DABE2F /* SFJScreenRecorder.swift in Sources */,
 			);
@@ -426,7 +430,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C67ZA79SMN;
-				INFOPLIST_FILE = SFJScreenRecoder/Info.plist;
+				INFOPLIST_FILE = SFJScreenRecorder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -446,7 +450,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C67ZA79SMN;
-				INFOPLIST_FILE = SFJScreenRecoder/Info.plist;
+				INFOPLIST_FILE = SFJScreenRecorder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
