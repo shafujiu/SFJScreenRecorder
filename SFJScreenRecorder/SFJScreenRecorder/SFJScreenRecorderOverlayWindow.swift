@@ -21,16 +21,11 @@ class SFJScreenRecorderOverlayWindow: Overlayable
     
     typealias SFJScreenRecorderWindowMutedBtnClickBlock = (_ isMuted: Bool) -> ()
     typealias SFJScreenRecorderWindowStopBtnClickBlock = (_ window: SFJScreenRecorderOverlayWindow)->()
-    
+    typealias SFJScreenRecorderWindowPausedBtnClickBlock = (_ isPaused: Bool) -> ()
     
     var onStopClick:SFJScreenRecorderWindowStopBtnClickBlock?
     var onMutedBtnClickBlock: SFJScreenRecorderWindowMutedBtnClickBlock?
-//    var recorder: SFJScreenRecorder?
-    var currentMuted: Bool {
-        mutedBtn.isSelected
-    }
-    
-    
+    var onPausedBtnClickBlock: SFJScreenRecorderWindowPausedBtnClickBlock?
     private lazy var overlayWindow: UIWindow = {
         return UIWindow(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: kWindowHeight))
     }()
@@ -54,6 +49,14 @@ class SFJScreenRecorderOverlayWindow: Overlayable
         return btn
     }()
     
+    private lazy var pausedBtn: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setTitle("暂停", for: .normal)
+        btn.setTitle("继续", for: .selected)
+        btn.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        return btn
+    }()
+    
     init () {
         self.setupViews()
     }
@@ -69,9 +72,7 @@ class SFJScreenRecorderOverlayWindow: Overlayable
                 self.contentV.isHidden = true
                 self.contentV.transform = CGAffineTransform.identity;
             })
-            
         }
-        
     }
     
     func setupViews () {
@@ -83,21 +84,26 @@ class SFJScreenRecorderOverlayWindow: Overlayable
         
         stopButton.setTitle("Stop Recording", for: .normal)
         stopButton.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        stopButton.addTarget(self, action: #selector(stopRecording), for: .touchUpInside)
         
+        stopButton.addTarget(self, action: #selector(stopRecording), for: .touchUpInside)
         mutedBtn.addTarget(self, action: #selector(mutedBtnClick(_:)), for: .touchUpInside)
-        mutedBtn.frame = CGRect(x: screenW * 0.5, y: 0, width: screenW * 0.5, height: kWindowHeight)
-        stopButton.frame = CGRect(x: 0, y: 0, width: screenW * 0.5, height: kWindowHeight)
+        pausedBtn.addTarget(self, action: #selector(pausedBtnClick(_:)), for: .touchUpInside)
+        
+        let widthRate: CGFloat = 1.0 / 3.0
+        stopButton.frame = CGRect(x: 0, y: 0, width: screenW * widthRate, height: kWindowHeight)
+        mutedBtn.frame = CGRect(x: screenW * widthRate, y: 0, width: screenW * widthRate, height: kWindowHeight)
+        pausedBtn.frame = CGRect(x: screenW * widthRate * 2, y: 0, width: screenW * widthRate, height: kWindowHeight)
         
         contentV.addSubview(mutedBtn)
         contentV.addSubview(stopButton)
+        contentV.addSubview(pausedBtn)
         
         overlayWindow.addSubview(contentV)
         overlayWindow.windowLevel = UIWindow.Level(rawValue: CGFloat.greatestFiniteMagnitude)
     }
     
     
-    @objc func stopRecording(){
+    @objc func stopRecording() {
         onStopClick?(self)
         hide()
     }
@@ -107,8 +113,12 @@ class SFJScreenRecorderOverlayWindow: Overlayable
         onMutedBtnClickBlock?(sender.isSelected)
     }
     
-    func show()
-    {
+    @objc func pausedBtnClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        onPausedBtnClickBlock?(sender.isSelected)
+    }
+    
+    func show() {
         DispatchQueue.main.async {
             self.contentV.transform = CGAffineTransform(translationX: 0, y: -kWindowHeight)
             self.overlayWindow.makeKeyAndVisible()
@@ -119,5 +129,9 @@ class SFJScreenRecorderOverlayWindow: Overlayable
             })
         }
         
+    }
+    
+    deinit {
+        print(self, "deinit")
     }
 }

@@ -25,6 +25,22 @@ class SFJScreenRecorder: NSObject {
     
     /// 是否静音
     private var isMuted: Bool = false
+    
+    /// 控制暂停
+    private var isPaused: Bool = false {
+        didSet {
+            if isPaused {continueLocked = false}
+        }
+    }
+    /// 暂停记录标记   开关打开的时候 记录下一次继续录制的偏移
+    private var continueLocked: Bool = true
+    
+    /// 记录 继续录制的偏移
+    private var continueOffsetTime: CMTime = .zero
+    
+    /// 记录上一次buffer的时间
+    private var previousTime:CMTime = .indefinite
+    
 }
 
 // MARK: - public api
@@ -33,6 +49,10 @@ extension SFJScreenRecorder {
     
     func muted(_ muted: Bool) {
         isMuted = muted
+    }
+    
+    func setPaused(_ paused: Bool) {
+        self.isPaused = paused
     }
     
     func startRecording(withFileName fileName: String, recordingHandler:@escaping (Error?)-> Void) {
@@ -75,9 +95,29 @@ extension SFJScreenRecorder {
     /// assetWriter 写入
     /// - Parameters:
     ///   - bufferType: bufferType description
-    ///   - buffer: buffer description
-    private func assetWriterWritingHandleAction(bufferType: RPSampleBufferType, buffer: CMSampleBuffer) {
-        guard CMSampleBufferDataIsReady(buffer)  else {return}
+    ///   - sampleBuffer: buffer description
+    private func assetWriterWritingHandleAction(bufferType: RPSampleBufferType, sampleBuffer: CMSampleBuffer) {
+        guard CMSampleBufferDataIsReady(sampleBuffer)  else {return}
+        
+        // 暂停处理逻辑
+        if isPaused { return }
+        
+        var buffer = sampleBuffer
+        var currentSampleTime = CMSampleBufferGetOutputPresentationTimeStamp(buffer)
+        
+        if !continueLocked {
+            continueLocked = true
+            let current = continueOffsetTime.value > 0 ? CMTimeSubtract(currentSampleTime, continueOffsetTime) : currentSampleTime
+            let offset = CMTimeSubtract(current, previousTime)
+            continueOffsetTime = continueOffsetTime == .zero ? offset : CMTimeAdd(continueOffsetTime, offset)
+        }
+        
+        if continueOffsetTime.value > 0, let bu = adjustTime(buffer, continueOffsetTime) {
+            buffer = bu
+        }
+        currentSampleTime = CMSampleBufferGetPresentationTimeStamp(buffer)
+        previousTime = currentSampleTime
+        
         switch bufferType {
         case .video:
             if videoInput.isReadyForMoreMediaData {
@@ -96,6 +136,20 @@ extension SFJScreenRecorder {
             break
         }
     }
+    /// buffer 拼接偏移
+    private func adjustTime(_ sampleBuffer: CMSampleBuffer, _ offset:CMTime) -> CMSampleBuffer? {
+        var count:CMItemCount = 0
+        CMSampleBufferGetSampleTimingInfoArray(sampleBuffer, entryCount: 0, arrayToFill: nil, entriesNeededOut: &count)
+        var pInfo = CMSampleTimingInfo()
+        CMSampleBufferGetSampleTimingInfoArray(sampleBuffer, entryCount: count, arrayToFill: &pInfo, entriesNeededOut: &count)
+        
+        pInfo.decodeTimeStamp = CMTimeSubtract(pInfo.decodeTimeStamp, offset)
+        pInfo.presentationTimeStamp = CMTimeSubtract(pInfo.presentationTimeStamp, offset)
+        
+        var sout:CMSampleBuffer?
+        CMSampleBufferCreateCopyWithNewTiming(allocator: nil, sampleBuffer: sampleBuffer, sampleTimingEntryCount: count, sampleTimingArray: &pInfo, sampleBufferOut: &sout)
+        return sout
+    }
     /// 抓取到buffer的回调
     /// - Parameters:
     ///   - bufferType: bufferType description
@@ -106,7 +160,7 @@ extension SFJScreenRecorder {
         case .unknown:
             break
         case .writing:
-            self.assetWriterWritingHandleAction(bufferType: bufferType, buffer: buffer)
+            self.assetWriterWritingHandleAction(bufferType: bufferType, sampleBuffer: buffer)
         case .failed:
             return
         default:

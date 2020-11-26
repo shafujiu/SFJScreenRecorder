@@ -32,6 +32,10 @@ class SFJScreenRecorderCoordinator {
         overlayableWindow?.onMutedBtnClickBlock = { [weak self] isMuted in
             self?.screenRecorder?.muted(isMuted)
         }
+        
+        overlayableWindow?.onPausedBtnClickBlock = { [weak self] isPaused in
+            self?.screenRecorder?.setPaused(isPaused)
+        }
     }
 }
 

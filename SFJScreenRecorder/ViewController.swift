@@ -10,12 +10,15 @@ import AVKit
 @available(iOS 11.0, *)
 class ViewController: UIViewController {
 
+    @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var animateV: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     var items: [URL] = []
     var playerVC: AVPlayerViewController?
     let screenRecorder = SFJScreenRecorderCoordinator()
+    
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,10 @@ class ViewController: UIViewController {
                     self?.tableView.reloadData()
                 }
             }
+        }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {[weak self] (_) in
+            self?.timeLbl.text = "\(Date())"
         }
     }
 
