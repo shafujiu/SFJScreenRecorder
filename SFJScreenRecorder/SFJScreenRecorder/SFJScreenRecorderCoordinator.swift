@@ -19,8 +19,7 @@ class SFJScreenRecorderCoordinator {
     var complateBlock: ScreenRecorderDidComplateRecordBlock?
     
     init() {
-        screenRecorder = SFJScreenRecorder()
-        setupOverlayableWindow()
+        
     }
     /// 配置window
     private func setupOverlayableWindow() {
@@ -67,6 +66,8 @@ class SFJScreenRecorderCoordinator {
 extension SFJScreenRecorderCoordinator {
     /// 开始 每次开始录制都是一个新的 SFJScreenRecorder对象 以及一个新的 Window对象
     func startRecording() {
+        screenRecorder = SFJScreenRecorder()
+        setupOverlayableWindow()
         overlayableWindow?.show()
         screenRecorder?.startRecording(withFileName: "视频\(Date().timeIntervalSince1970)") { (err) in
             print("数据写入中 err:", err?.localizedDescription ?? "")
