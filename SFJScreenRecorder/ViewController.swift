@@ -47,7 +47,7 @@ class ViewController: UIViewController {
             self.activityIndicatorView.isHidden = true
             if error != nil {
                 let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
-                let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert) 
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (a) in
                 }))
                 self.present(alert, animated: true) {() -> Void in }

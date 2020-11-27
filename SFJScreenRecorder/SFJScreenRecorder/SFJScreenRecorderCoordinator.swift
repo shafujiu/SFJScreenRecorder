@@ -18,7 +18,10 @@ class SFJScreenRecorderCoordinator {
     
     var complateBlock: ScreenRecorderDidComplateRecordBlock?
     
-    
+    init() {
+        screenRecorder = SFJScreenRecorder()
+        setupOverlayableWindow()
+    }
     /// 配置window
     private func setupOverlayableWindow() {
         overlayableWindow = SFJScreenRecorderOverlayWindow()
@@ -37,6 +40,26 @@ class SFJScreenRecorderCoordinator {
             self?.screenRecorder?.setPaused(isPaused)
         }
     }
+    
+    private func registerNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(appEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillTerminate), name: UIApplication.willTerminateNotification, object: nil)
+    }
+    
+    @objc private func appEnterBackground() {
+        
+    }
+    
+    @objc private func appBecomeActive() {
+        
+    }
+    
+    @objc private func appWillTerminate() {
+        
+    }
+    
 }
 
 // MARK: - public api
@@ -44,11 +67,14 @@ class SFJScreenRecorderCoordinator {
 extension SFJScreenRecorderCoordinator {
     /// 开始 每次开始录制都是一个新的 SFJScreenRecorder对象 以及一个新的 Window对象
     func startRecording() {
-        screenRecorder = SFJScreenRecorder()
-        setupOverlayableWindow()
         overlayableWindow?.show()
         screenRecorder?.startRecording(withFileName: "视频\(Date().timeIntervalSince1970)") { (err) in
             print("数据写入中 err:", err?.localizedDescription ?? "")
         }
     }
+}
+
+@available(iOS 11.0, *)
+extension SFJScreenRecorderCoordinator {
+    
 }
